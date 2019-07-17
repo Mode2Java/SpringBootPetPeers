@@ -1,0 +1,8 @@
+com\PetStop\controller\PetsAppController.class
+com\PetStop\repository\PetRepository.class
+com\PetStop\model\User.class
+com\PetStop\PetStopApplication.class
+com\PetStop\repository\UserRepository.class
+com\PetStop\ServletInitializer.class
+com\PetStop\SecurityConfiguration\UserSecurityConfig.class
+com\PetStop\model\Pet.class
