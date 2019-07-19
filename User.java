@@ -1,29 +1,36 @@
-package petstop.UserRegistration.model;
+package com.projectpet.model;
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+@Component
 @Entity
-@Table(name="pet_user2")
-public class User{
+@Table(name="pet_user")
+@Scope("session")
+public class User implements Serializable{
+	private static final long serialVersionUID = 1L;
 	@Id
-	//@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="id_seq")
+	@SequenceGenerator(name="id_seq",initialValue=100,allocationSize=1)
 	private int id;
-	@Column(name ="username", nullable = false)
-	@NotEmpty
+	@Column(name="user_name",unique=true)
 	private String username;
-	//@Size(min = 5, max = 8, message = "Required.")
+	@Column(name="user_passwd")
 	private String password;
 	@Transient
-	private String passwordConfirm;
+	private String confirmPassword;
+	//List <Pet> pet;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -33,7 +40,7 @@ public class User{
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.passwordConfirm = confirmpassword;
+		this.confirmPassword = confirmpassword;
 	}
 	public int getId() {
 		return id;
@@ -41,6 +48,7 @@ public class User{
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -53,13 +61,16 @@ public class User{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public String getPasswordConfirm() {
-		return passwordConfirm;
+	public String getConfirmPassword() {
+		return confirmPassword;
 	}
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
+	public void setConfirmPassword(String confirmpassword) {
+		this.confirmPassword = confirmpassword;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", confirmpassword="
+				+ confirmPassword + "]";
+	}
+		
 }

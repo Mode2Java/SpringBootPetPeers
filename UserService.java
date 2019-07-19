@@ -1,8 +1,11 @@
-package petstop.UserRegistration.service;
+package com.projectpet.service;
 
-import petstop.UserRegistration.model.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService {
-    void save(User user);
-    User findByUsername(String username);
+import com.projectpet.model.User;
+
+public interface UserService extends UserDetailsService {
+	 public User searchUser(String username,String password);
+	 void save(User user); 
+	 public User findByUsername(String username);
 }
